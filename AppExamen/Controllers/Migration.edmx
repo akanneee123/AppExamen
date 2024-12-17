@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DataBaseGestionPersonalProyectosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asignaciones">
+          <Key>
+            <PropertyRef Name="ID_Asignacion" />
+          </Key>
+          <Property Name="ID_Asignacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Empleado" Type="int" Nullable="false" />
+          <Property Name="ID_Proyecto" Type="int" Nullable="false" />
+          <Property Name="FechaAsignacion" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="ID_Categoria" />
+          </Key>
+          <Property Name="ID_Categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCategoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="ID_Empleado" />
+          </Key>
+          <Property Name="ID_Empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="100" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="15" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Salario" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ID_Categoria" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proyectos">
+          <Key>
+            <PropertyRef Name="ID_Proyecto" />
+          </Key>
+          <Property Name="ID_Proyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreProyecto" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" />
+        </EntityType>
+        <Association Name="FK__Asignacio__ID_Em__32E0915F">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="ID_Empleado" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="ID_Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__ID_Pr__33D4B598">
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ID_Proyecto" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="ID_Proyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__ID_Ca__2B3F6F97">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="ID_Categoria" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="ID_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataBaseGestionPersonalProyectosModelStoreContainer">
+          <EntitySet Name="Asignaciones" EntityType="Self.Asignaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proyectos" EntityType="Self.Proyectos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Asignacio__ID_Em__32E0915F" Association="Self.FK__Asignacio__ID_Em__32E0915F">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__ID_Pr__33D4B598" Association="Self.FK__Asignacio__ID_Pr__33D4B598">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__ID_Ca__2B3F6F97" Association="Self.FK__Empleados__ID_Ca__2B3F6F97">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataBaseGestionPersonalProyectosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asignaciones">
+          <Key>
+            <PropertyRef Name="ID_Asignacion" />
+          </Key>
+          <Property Name="ID_Asignacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Empleado" Type="Int32" Nullable="false" />
+          <Property Name="ID_Proyecto" Type="Int32" Nullable="false" />
+          <Property Name="FechaAsignacion" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Asignacio__ID_Em__32E0915F" FromRole="Asignaciones" ToRole="Empleados" />
+          <NavigationProperty Name="Proyectos" Relationship="Self.FK__Asignacio__ID_Pr__33D4B598" FromRole="Asignaciones" ToRole="Proyectos" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="ID_Categoria" />
+          </Key>
+          <Property Name="ID_Categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCategoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__ID_Ca__2B3F6F97" FromRole="Categorias" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="ID_Empleado" />
+          </Key>
+          <Property Name="ID_Empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salario" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ID_Categoria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Asignaciones" Relationship="Self.FK__Asignacio__ID_Em__32E0915F" FromRole="Empleados" ToRole="Asignaciones" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK__Empleados__ID_Ca__2B3F6F97" FromRole="Empleados" ToRole="Categorias" />
+        </EntityType>
+        <EntityType Name="Proyectos">
+          <Key>
+            <PropertyRef Name="ID_Proyecto" />
+          </Key>
+          <Property Name="ID_Proyecto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreProyecto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Asignaciones" Relationship="Self.FK__Asignacio__ID_Pr__33D4B598" FromRole="Proyectos" ToRole="Asignaciones" />
+        </EntityType>
+        <Association Name="FK__Asignacio__ID_Em__32E0915F">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="ID_Empleado" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="ID_Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__ID_Pr__33D4B598">
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ID_Proyecto" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="ID_Proyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__ID_Ca__2B3F6F97">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="ID_Categoria" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="ID_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataBaseGestionPersonalProyectosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asignaciones" EntityType="Self.Asignaciones" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Proyectos" EntityType="Self.Proyectos" />
+          <AssociationSet Name="FK__Asignacio__ID_Em__32E0915F" Association="Self.FK__Asignacio__ID_Em__32E0915F">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__ID_Pr__33D4B598" Association="Self.FK__Asignacio__ID_Pr__33D4B598">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__ID_Ca__2B3F6F97" Association="Self.FK__Empleados__ID_Ca__2B3F6F97">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataBaseGestionPersonalProyectosModelStoreContainer" CdmEntityContainer="DataBaseGestionPersonalProyectosEntities">
+          <EntitySetMapping Name="Asignaciones">
+            <EntityTypeMapping TypeName="DataBaseGestionPersonalProyectosModel.Asignaciones">
+              <MappingFragment StoreEntitySet="Asignaciones">
+                <ScalarProperty Name="ID_Asignacion" ColumnName="ID_Asignacion" />
+                <ScalarProperty Name="ID_Empleado" ColumnName="ID_Empleado" />
+                <ScalarProperty Name="ID_Proyecto" ColumnName="ID_Proyecto" />
+                <ScalarProperty Name="FechaAsignacion" ColumnName="FechaAsignacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="DataBaseGestionPersonalProyectosModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="ID_Categoria" ColumnName="ID_Categoria" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="DataBaseGestionPersonalProyectosModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="ID_Empleado" ColumnName="ID_Empleado" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="ID_Categoria" ColumnName="ID_Categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proyectos">
+            <EntityTypeMapping TypeName="DataBaseGestionPersonalProyectosModel.Proyectos">
+              <MappingFragment StoreEntitySet="Proyectos">
+                <ScalarProperty Name="ID_Proyecto" ColumnName="ID_Proyecto" />
+                <ScalarProperty Name="NombreProyecto" ColumnName="NombreProyecto" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
